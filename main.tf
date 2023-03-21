@@ -28,7 +28,7 @@ resource "databricks_metastore_data_access" "first" {
   metastore_id = databricks_metastore.this.id
   name         = "the-keys"
   azure_managed_identity {
-    access_connector_id = azurerm_databricks_access_connector.unity.id
+    access_connector_id = azurerm_databricks_access_connector.this.id
   }
 
   is_default = true
