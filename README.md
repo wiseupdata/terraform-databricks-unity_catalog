@@ -12,7 +12,7 @@ Easy create a Databricks Unit Catalog!
   <img align="left" alt="wise Up Data | Twitter" width="22px" src="https://raw.githubusercontent.com/wiseupdata/terraform-databricks-unity_catalog/main/assets/twitter.svg" />
 </a>
 <a href="https://github.com/wiseupdata/terraform-databricks-unity_catalog">
-  <img align="left" alt="wise Up Data's LinkedIN" width="22px" src="https://raw.githubusercontent.com/wiseupdata/terraform-databricks-unity_catalog/6b3dc41c772ba34c80e0bcb7485044db43e5d2a2/assets/linkedin.svg" />
+  <img align="left" alt="wise Up Data's LinkedIN" width="22px" src="https://raw.githubusercontent.com/wiseupdata/terraform-databricks-unity_catalog/ffaf28ec794c1704499e0b1af48cd62771a544da/assets/linkedin.svg" />
 </a>
 
 ![visitors](https://visitor-badge.glitch.me/badge?page_id=wiseupdata.terraform-databricks-unity_catalog&left_color=green&right_color=black)
