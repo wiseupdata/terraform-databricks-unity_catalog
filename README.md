@@ -26,41 +26,29 @@ Easy create a Databricks Unit Catalog!
 Module - Databricks Unit Catalog in Azure 🚀️
 
 </h1>
-Last version tested | Terraform 4.1 and azurerm 3.48
+Last version tested | Terraform 4.1 azurerm 3.48 databricks 1.13
 
 ## Simple config. ❤️
 
 main.tf
 
 ```
-module "databricks_workspaces" {
-  source  = "wiseupdata/databricks_workspaces/azurerm"
+module "unity_catalog" {
+  source  = "wiseupdata/unity_catalog/databricks"
   version = "0.0.1"
-  areas = ["data", "sales"]
+
+  stg_id_to_metastore = "your_storage_account_to_save_the_metastore"
+  databricks_resource_id = "your_main_databricks_to_be_the_driver_to_your_metastore"
 }
 ```
 
 ## Features ✨️
 
 - Auto-generated tags
-- Auto-generated the resource group
+- Auto-generated the variable names
 - Apply's the Standard, environment as suffix
 - All variables are aptionals and can be overwrite with a custom value
 
-## Config. 2 👋
-
-main.tf
-
-```
-module "databricks_workspaces" {
-  source  = "wiseupdata/databricks_workspaces/azurerm"
-  version = "0.0.1"
-  areas   = ["data", "mkt"]
-  existent_rg_name = "your_resource_group_name"
-  company_name = "your_company_name"
-  company_abrv = "your_company_abbreviation"
-}
-```
 
 ## Hello world 🎉
 
@@ -76,13 +64,32 @@ Create the main file with some infos.
 
 ```
 cat <<EOF > main.tf
-module "databricks_workspaces" {
-  source  = "wiseupdata/databricks_workspaces/azurerm"
-  version = "0.0.1"
+terraform {
+  required_providers {
+    azurerm = {
+      source = "hashicorp/azurerm"
+    }
+    databricks = {
+      source = "databricks/databricks"
+    }
+  }
 }
 
 provider "azurerm" {
+  subscription_id = local.subscription_id
   features {}
+}
+
+provider "databricks" {
+  host = local.databricks_workspace_host
+}
+
+module "unity_catalog" {
+  source  = "wiseupdata/unity_catalog/databricks"
+  version = "0.0.1"
+
+  stg_id_to_metastore = "your_storage_account_to_save_the_metastore"
+  databricks_resource_id = "your_main_databricks_to_be_the_driver_to_your_metastore"
 }
 
 output "databricks_workspaces_outputs" {
@@ -101,20 +108,6 @@ terraform plan -out plan.output
 terraform apply plan.output
 ```
 
-
-
-Create a cluster and test the result with Unit Catalog!
-
-
-
-Check the result🏅
-
----
-
-![](https://raw.githubusercontent.com/wiseupdata/terraform-databricks-unity_catalog/main/assets/20230321_212542_image.png)
-
-![](https://raw.githubusercontent.com/wiseupdata/terraform-databricks-unity_catalog/main/assets/20230321_211843_image.png)
-
 ---
 
 # Clean the resources 🏳
@@ -125,16 +118,6 @@ cd ..
 rm -Rf tmp
 ```
 
-## Config. 3 used in the hello world 🏁
-
-main.tf
-
-```
-module "databricks_workspaces" {
-  source  = "wiseupdata/databricks_workspaces/azurerm"
-  version = "0.0.1"
-}
-```
 
 # References🤘
 
@@ -145,9 +128,6 @@ module "databricks_workspaces" {
 
 
 ---
-
-
-
 
 
 # The most cheap azure cluster is the bellow
@@ -167,5 +147,5 @@ Recreate a workspace!
 terraform state list 
 
 # Recreate the one with issue
-terraform apply -replace=module.azure_main.module.databricks_workspaces.azurerm_databricks_workspace.this[0]
+terraform apply -replace=resource_with_issue
 ```
