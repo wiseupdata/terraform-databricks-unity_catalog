@@ -153,7 +153,7 @@ module "databricks_workspaces" {
 
 You can test in single mode.
 
-![](https://raw.githubusercontent.com/wiseupdata/terraform-databricks-unity_catalog/main/20230323_202510_image.png)
+![](https://raw.githubusercontent.com/wiseupdata/terraform-databricks-unity_catalog/main/assets/20230323_202510_image.png)
 
 <br>
 
