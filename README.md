@@ -2,26 +2,26 @@ Easy create a Databricks Unit Catalog!
 
 ---
 
-<a href="https://github.com/wiseupdata/terraform-azurerm-databricks_workspaces">
-<img align="left" alt="Wise Up Data's Instagram" width="22px" src="https://raw.githubusercontent.com/wiseupdata/terraform-azurerm-databricks_workspaces/main/assets/instagram.png" />   
+<a href="https://github.com/wiseupdata/terraform-databricks-unity_catalog">
+<img align="left" alt="Wise Up Data's Instagram" width="22px" src="https://raw.githubusercontent.com/wiseupdata/terraform-databricks-unity_catalog/main/assets/instagram.png" />   
 </a> 
-<a href="https://github.com/wiseupdata/terraform-azurerm-databricks_workspaces">
-  <img align="left" alt="wise Up Data's Discord" width="22px" src="https://raw.githubusercontent.com/wiseupdata/terraform-azurerm-databricks_workspaces/main/assets/discord.svg" />
+<a href="https://github.com/wiseupdata/terraform-databricks-unity_catalog">
+  <img align="left" alt="wise Up Data's Discord" width="22px" src="https://raw.githubusercontent.com/wiseupdata/terraform-databricks-unity_catalog/main/assets/discord.svg" />
 </a>
-<a href="https://github.com/wiseupdata/terraform-azurerm-databricks_workspaces">
-  <img align="left" alt="wise Up Data | Twitter" width="22px" src="https://raw.githubusercontent.com/wiseupdata/terraform-azurerm-databricks_workspaces/main/assets/twitter.svg" />
+<a href="https://github.com/wiseupdata/terraform-databricks-unity_catalog">
+  <img align="left" alt="wise Up Data | Twitter" width="22px" src="https://raw.githubusercontent.com/wiseupdata/terraform-databricks-unity_catalog/main/assets/twitter.svg" />
 </a>
-<a href="https://github.com/wiseupdata/terraform-azurerm-databricks_workspaces">
-  <img align="left" alt="wise Up Data's LinkedIN" width="22px" src="https://raw.githubusercontent.com/wiseupdata/terraform-azurerm-databricks_workspaces/6b3dc41c772ba34c80e0bcb7485044db43e5d2a2/assets/linkedin.svg" />
+<a href="https://github.com/wiseupdata/terraform-databricks-unity_catalog">
+  <img align="left" alt="wise Up Data's LinkedIN" width="22px" src="https://raw.githubusercontent.com/wiseupdata/terraform-databricks-unity_catalog/6b3dc41c772ba34c80e0bcb7485044db43e5d2a2/assets/linkedin.svg" />
 </a>
 
-![visitors](https://visitor-badge.glitch.me/badge?page_id=wiseupdata.terraform-azurerm-databricks_workspaces&left_color=green&right_color=black)
-![GitHub](https://img.shields.io/github/license/wiseupdata/terraform-azurerm-databricks_workspaces)
+![visitors](https://visitor-badge.glitch.me/badge?page_id=wiseupdata.terraform-databricks-unity_catalog&left_color=green&right_color=black)
+![GitHub](https://img.shields.io/github/license/wiseupdata/terraform-databricks-unity_catalog)
 
 ---
 
 <h1>
-<img align="left" alt="DP-203" src="https://raw.githubusercontent.com/wiseupdata/terraform-azurerm-databricks_workspaces/main/assets/terraform.png" width="100" />
+<img align="left" alt="DP-203" src="https://raw.githubusercontent.com/wiseupdata/terraform-databricks-unity_catalog/main/assets/terraform.png" width="100" />
 
 Module - Databricks Unit Catalog in Azure 🚀️
 
@@ -105,9 +105,9 @@ Check the result🏅
 
 ---
 
-![](https://raw.githubusercontent.com/wiseupdata/terraform-azurerm-databricks_workspaces/main/assets/20230321_212542_image.png)
+![](https://raw.githubusercontent.com/wiseupdata/terraform-databricks-unity_catalog/main/assets/20230321_212542_image.png)
 
-![](https://raw.githubusercontent.com/wiseupdata/terraform-azurerm-databricks_workspaces/main/assets/20230321_211843_image.png)
+![](https://raw.githubusercontent.com/wiseupdata/terraform-databricks-unity_catalog/main/assets/20230321_211843_image.png)
 
 ---
 
