@@ -130,7 +130,7 @@ rm -Rf tmp
 ---
 
 
-# The most cheap azure cluster is the bellow
+# One of The most cheaper azure clusters is the one below
 
 You can test in single mode.
 
