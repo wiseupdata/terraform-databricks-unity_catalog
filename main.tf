@@ -1,18 +1,17 @@
 resource "azurerm_databricks_access_connector" "this" {
-  name                = "${var.app_name}-databricks-mi"
-  resource_group_name = var.rg_name
+  name                = local.connector_name
+  resource_group_name = local.rg_name
   location            = var.location
   identity {
-    type = "SystemAssigned"
+    type = var.identity_type
   }
-  tags = var.default_tags
+  tags = local.default_tags
 }
 
 resource "azurerm_role_assignment" "example" {
   scope                = var.stg_id
-  role_definition_name = "Storage Blob Data Contributor"
+  role_definition_name = var.role_name
   principal_id         = azurerm_databricks_access_connector.this.identity[0].principal_id
-
 }
 
 resource "databricks_metastore" "this" {
@@ -21,7 +20,6 @@ resource "databricks_metastore" "this" {
     var.container_name,
   var.stg_name)
   force_destroy = true
-
 }
 
 resource "databricks_metastore_data_access" "first" {
@@ -37,5 +35,5 @@ resource "databricks_metastore_data_access" "first" {
 resource "databricks_metastore_assignment" "this" {
   workspace_id         = var.databricks_id
   metastore_id         = databricks_metastore.this.id
-  default_catalog_name = "hive_metastore"
+  default_catalog_name = var.default_catalog_name
 }
