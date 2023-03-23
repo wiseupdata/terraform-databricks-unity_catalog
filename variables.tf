@@ -71,6 +71,21 @@ variable "databricks_url" {
   type = string
 }
 
+variable "metastore_name" {
+  type    = string
+  default = "auto-create"
+}
+
+variable "connector_name" {
+  type    = string
+  default = "auto-create"
+}
+
+variable "metastore_key_name" {
+  type    = string
+  default = "auto-create"
+}
+
 locals {
 
   basic_tags = {
@@ -82,11 +97,11 @@ locals {
 
   rg_name = var.rg_name != "auto-name" ? var.rg_name : "rg-${var.app_name}-workspaces-${var.company_name}-${var.env}"
 
-  metastore_name = "${var.app_name}-${var.company_name}-metastore"
-  connector_name = "${var.app_name}-${var.company_name}-mi"
+  metastore_name = var.metastore_name == "auto-create" ? "${var.app_name}-${var.company_name}-metastore" : var.metastore_name
+  connector_name = var.connector_name == "auto-create" ? "${var.app_name}-${var.company_name}-connector" : var.connector_name
   default_tags   = keys(var.default_tags)[0] == "auto-create" ? local.basic_tags : var.default_tags
 
-  dbs_key_metastore_key_name = "${var.app_name}-${var.company_name}-metastore-key"
+  metastore_key_name = var.metastore_key_name == "auto-create" ? "${var.app_name}-${var.company_name}-metastore-key" : var.metastore_key_name
 
 }
 

@@ -30,7 +30,7 @@ resource "databricks_metastore" "this" {
 
 resource "databricks_metastore_data_access" "first" {
   metastore_id = databricks_metastore.this.id
-  name         = local.dbs_key_metastore_key_name
+  name         = local.metastore_key_name
   azure_managed_identity {
     access_connector_id = azurerm_databricks_access_connector.this.id
   }
