@@ -1,22 +1,19 @@
 terraform {
-  required_version = ">=1.3"
   required_providers {
     azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~>3"
+      source = "hashicorp/azurerm"
     }
     databricks = {
-      source  = "databricks/databricks"
-      version = "~>1"
+      source = "databricks/databricks"
     }
   }
 }
 
 provider "azurerm" {
-  features {
-  }
+  subscription_id = local.subscription_id
+  features {}
 }
 
 provider "databricks" {
-  host = var.databricks_url
+  host = local.databricks_workspace_host
 }

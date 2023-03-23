@@ -141,6 +141,7 @@ module "databricks_workspaces" {
 1. [Wise Up Data - Github](https://github.com/wiseupdata)
 1. [Azure Databricks Prices](https://azure.microsoft.com/en-us/pricing/details/databricks/)
 1. [Azure Databricks bellied per second](https://azure.microsoft.com/en-us/products/databricks/#heading-oc808f)
+1. [Terraform setup](https://registry.terraform.io/providers/databricks/databricks/latest/docs/guides/unity-catalog-azure#provider-initialization)
 
 
 ---

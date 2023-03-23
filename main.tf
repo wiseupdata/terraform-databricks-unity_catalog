@@ -9,14 +9,14 @@ resource "azurerm_databricks_access_connector" "this" {
 }
 
 resource "azurerm_role_assignment" "this" {
-  scope                = var.stg_metastore_id
+  scope                = var.stg_id_to_metastore
   role_definition_name = var.role_name
   principal_id         = azurerm_databricks_access_connector.this.identity[0].principal_id
 }
 
 resource "azurerm_storage_container" "this" {
   name                  = var.container_name
-  storage_account_name  = var.stg_metastore_name
+  storage_account_name  = local.stg_name_to_metastore
   container_access_type = "private"
 }
 
@@ -39,7 +39,7 @@ resource "databricks_metastore_data_access" "first" {
 }
 
 resource "databricks_metastore_assignment" "this" {
-  workspace_id         = var.databricks_id
+  workspace_id         = local.databricks_workspace_id
   metastore_id         = databricks_metastore.this.id
   default_catalog_name = var.default_catalog_name
 }
