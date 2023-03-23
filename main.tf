@@ -8,15 +8,15 @@ resource "azurerm_databricks_access_connector" "this" {
   tags = local.default_tags
 }
 
-resource "azurerm_role_assignment" "example" {
-  scope                = var.stg_id
+resource "azurerm_role_assignment" "this" {
+  scope                = var.stg_metastore_id
   role_definition_name = var.role_name
   principal_id         = azurerm_databricks_access_connector.this.identity[0].principal_id
 }
 
 resource "azurerm_storage_container" "this" {
   name                  = var.container_name
-  storage_account_name  = var.stg_name
+  storage_account_name  = var.stg_metastore_name
   container_access_type = "private"
 }
 

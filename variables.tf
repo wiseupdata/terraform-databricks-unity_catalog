@@ -55,11 +55,11 @@ variable "env" {
   default     = "dev"
 }
 
-variable "stg_id" {
+variable "stg_metastore_id" {
   type = string
 }
 
-variable "stg_name" {
+variable "stg_metastore_name" {
   type = string
 }
 
