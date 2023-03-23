@@ -32,3 +32,4 @@ override.tf.json
 terraform.tfvars
 # versions.tf
 oneclik-deploy.sh
+plan.out

@@ -16,3 +16,7 @@ provider "azurerm" {
   features {
   }
 }
+
+provider "databricks" {
+  host = var.databricks_url
+}

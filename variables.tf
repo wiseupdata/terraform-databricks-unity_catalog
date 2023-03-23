@@ -35,7 +35,7 @@ variable "default_catalog_name" {
 
 variable "container_name" {
   type    = string
-  default = "dbmanaged"
+  default = "managed-dbs"
 }
 
 variable "location" {
@@ -67,6 +67,10 @@ variable "databricks_id" {
   type = number
 }
 
+variable "databricks_url" {
+  type = string
+}
+
 locals {
 
   basic_tags = {
@@ -78,7 +82,11 @@ locals {
 
   rg_name = var.rg_name != "auto-name" ? var.rg_name : "rg-${var.app_name}-workspaces-${var.company_name}-${var.env}"
 
-  connector_name = "${var.app_name}-databricks-mi"
+  metastore_name = "${var.app_name}-${var.company_name}-metastore"
+  connector_name = "${var.app_name}-${var.company_name}-mi"
   default_tags   = keys(var.default_tags)[0] == "auto-create" ? local.basic_tags : var.default_tags
 
+  dbs_key_metastore_key_name = "${var.app_name}-${var.company_name}-metastore-key"
+
 }
+
