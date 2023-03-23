@@ -101,6 +101,12 @@ terraform plan -out plan.output
 terraform apply plan.output
 ```
 
+
+
+Create a cluster and test the result with Unit Catalog!
+
+
+
 Check the result🏅
 
 ---
@@ -133,8 +139,21 @@ module "databricks_workspaces" {
 # References🤘
 
 1. [Wise Up Data - Github](https://github.com/wiseupdata)
+1. [Azure Databricks Prices](https://azure.microsoft.com/en-us/pricing/details/databricks/)
+1. [Azure Databricks bellied per second](https://azure.microsoft.com/en-us/products/databricks/#heading-oc808f)
+
 
 ---
+
+
+
+
+
+# The most cheap azure cluster is the bellow
+
+You can test in single mode.
+
+![](https://raw.githubusercontent.com/wiseupdata/terraform-databricks-unity_catalog/main/20230323_202510_image.png)
 
 <br>
 
