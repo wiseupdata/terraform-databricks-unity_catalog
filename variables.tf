@@ -9,6 +9,12 @@ variable "app_name" {
   default     = "databricks"
 }
 
+variable "areas" {
+  description = "Areas to created the workspaces, one per area"
+  type        = list(string)
+  default     = ["data", "sales"]
+}
+
 variable "company_name" {
   description = "The name of the company."
   type        = string
@@ -99,8 +105,8 @@ variable "stg_name_to_metastore" {
   default = "auto-create"
 }
 
-variable "container_names" {
-  type = list
+variable "container_to_catalog_names" {
+  type    = list(any)
   default = ["raw"]
 }
 

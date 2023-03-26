@@ -1,23 +1,22 @@
-resource "databricks_metastore" "this" {
-  name = local.metastore_name
-  storage_root = format("abfss://%s@%s.dfs.core.windows.net/",
-    azurerm_storage_container.this.name,
-  azurerm_storage_container.this.storage_account_name)
-  force_destroy = true
-}
 
-resource "databricks_metastore_data_access" "main" {
+resource "databricks_catalog" "main" {
   metastore_id = databricks_metastore.this.id
-  name         = local.metastore_key_name
-  azure_managed_identity {
-    access_connector_id = azurerm_databricks_access_connector.main.id
+  name         = var.areas[0]
+  comment      = "This catalog is managed by terraform to area ${var.areas[0]}"
+  properties = {
+    purpose = "${var.areas[0]} area"
   }
-
-  is_default = true
+  depends_on = [databricks_metastore_assignment.this]
 }
 
-resource "databricks_metastore_assignment" "this" {
-  workspace_id         = local.databricks_workspace_id
-  metastore_id         = databricks_metastore.this.id
-  default_catalog_name = var.default_catalog_name
+resource "databricks_schema" "main" {
+  catalog_name = databricks_catalog.main.id
+  name         = var.container_to_catalog_names[0]
+  comment      = "This database is managed by terraform"
+  properties = {
+    kind = "various"
+  }
+  # depends_on = [
+  #   azuread_application.this, azuread_service_principal.this
+  # ]
 }

@@ -26,9 +26,9 @@ resource "databricks_storage_credential" "external" {
 }
 
 resource "databricks_external_location" "this" {
-  name = "external"
+  name = "stg-data-raw-dev"
   url = format("abfss://%s@%s.dfs.core.windows.net/",
-    var.container_names[0],
+    var.container_to_catalog_names[0],
   local.stg_ext_name)
 
   credential_name = databricks_storage_credential.external.id
