@@ -99,6 +99,11 @@ variable "stg_name_to_metastore" {
   default = "auto-create"
 }
 
+variable "container_names" {
+  type = list
+  default = ["raw"]
+}
+
 locals {
 
   basic_tags = {
