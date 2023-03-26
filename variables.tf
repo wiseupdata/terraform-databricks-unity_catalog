@@ -41,7 +41,7 @@ variable "container_name" {
 variable "location" {
   description = "Specifies the supported Azure location where the resource has to be created. Changing this forces a new resource to be created."
   type        = string
-  default     = "ukwest"
+  default     = "auto-extract"
 }
 
 variable "rg_name" {
@@ -55,16 +55,17 @@ variable "env" {
   default     = "dev"
 }
 
-variable "stg_id_to_metastore" {
-  type = string
-}
-
 variable "metastore_name" {
   type    = string
   default = "auto-create"
 }
 
 variable "connector_name" {
+  type    = string
+  default = "auto-create"
+}
+
+variable "connector_external_name" {
   type    = string
   default = "auto-create"
 }
@@ -78,6 +79,21 @@ variable "databricks_resource_id" {
   description = "The Azure resource ID for the databricks workspace deployment."
 }
 
+variable "stg_account_tier" {
+  type    = string
+  default = "Standard"
+}
+
+variable "stg_replication" {
+  type    = string
+  default = "LRS"
+}
+
+variable "stg_name_to_metastore" {
+  type    = string
+  default = "auto-create"
+}
+
 locals {
 
   basic_tags = {
@@ -87,10 +103,10 @@ locals {
     "company" : var.company_name
   }
 
-
-
   metastore_name = var.metastore_name == "auto-create" ? "${var.app_name}-${var.company_name}-metastore" : var.metastore_name
   connector_name = var.connector_name == "auto-create" ? "${var.app_name}-${var.company_name}-connector" : var.connector_name
+  connector_external_name = var.connector_external_name == "auto-create" ? "${var.app_name}-${var.company_name}-connector-ext" : var.connector_external_name
+  
   default_tags   = keys(var.default_tags)[0] == "auto-create" ? local.basic_tags : var.default_tags
 
   metastore_key_name = var.metastore_key_name == "auto-create" ? "${var.app_name}-${var.company_name}-metastore-key" : var.metastore_key_name
@@ -106,8 +122,9 @@ locals {
 
   rg_name = var.rg_name == "auto-extract" ? local.resource_group : var.rg_name
 
-  stg_regex             = "(?i)subscriptions/(.+)/resourceGroups/(.+)/providers/Microsoft.Storage/storageAccounts/(.+)"
-  stg_name_to_metastore = regex(local.stg_regex, var.stg_id_to_metastore)[2]
+  stg_name_to_metastore = var.stg_name_to_metastore == "auto-create" ? "stgmanaged${var.app_name}${var.env}" : var.stg_name_to_metastore
+
+  location = var.location == "auto-extract" ? data.azurerm_databricks_workspace.this.location : var.location
 
 }
 

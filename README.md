@@ -125,7 +125,8 @@ rm -Rf tmp
 1. [Azure Databricks Prices](https://azure.microsoft.com/en-us/pricing/details/databricks/)
 1. [Azure Databricks bellied per second](https://azure.microsoft.com/en-us/products/databricks/#heading-oc808f)
 1. [Terraform setup](https://registry.terraform.io/providers/databricks/databricks/latest/docs/guides/unity-catalog-azure#provider-initialization)
-
+1. [Terraform create groups](https://registry.terraform.io/providers/databricks/databricks/latest/docs/resources/mws_permission_assignment)
+1. [Documentation 1](https://learn.microsoft.com/en-us/azure/databricks/data-governance/unity-catalog/automate)
 
 ---
 

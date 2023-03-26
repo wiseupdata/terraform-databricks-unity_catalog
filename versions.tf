@@ -6,6 +6,9 @@ terraform {
     databricks = {
       source = "databricks/databricks"
     }
+    azuread = {
+      source = "hashicorp/azuread"
+    }
   }
 }
 
@@ -16,4 +19,8 @@ provider "azurerm" {
 
 provider "databricks" {
   host = local.databricks_workspace_host
+}
+
+provider "azuread" {
+  # Configuration options
 }
