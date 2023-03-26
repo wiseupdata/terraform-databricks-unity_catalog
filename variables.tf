@@ -1,6 +1,6 @@
 variable "stg_ext_id" {
   type = string
-  
+
 }
 
 variable "app_name" {
@@ -128,6 +128,9 @@ locals {
   rg_name = var.rg_name == "auto-extract" ? local.resource_group : var.rg_name
 
   stg_name_to_metastore = var.stg_name_to_metastore == "auto-create" ? "stgmanaged${var.app_name}${var.env}" : var.stg_name_to_metastore
+
+  stg_ext_regx = "(?i)subscriptions/(.+)/resourceGroups/(.+)/providers/Microsoft.Storage/storageAccounts/(.+)"
+  stg_ext_name = regex(local.stg_ext_regx, var.stg_ext_id)[2]
 
   location = var.location == "auto-extract" ? data.azurerm_databricks_workspace.this.location : var.location
 
