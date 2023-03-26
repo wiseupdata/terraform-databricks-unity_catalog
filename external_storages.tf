@@ -26,7 +26,7 @@ resource "databricks_storage_credential" "external" {
 }
 
 resource "databricks_external_location" "this" {
-  name = "stg-data-raw-dev"
+  name = "${var.areas[0]}-${var.container_to_catalog_names[0]}-${var.env}"
   url = format("abfss://%s@%s.dfs.core.windows.net/",
     var.container_to_catalog_names[0],
   local.stg_ext_name)
