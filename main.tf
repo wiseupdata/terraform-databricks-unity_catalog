@@ -1,40 +1,4 @@
 ########################################################
-# Configure Azure objects
-########################################################
-
-resource "azurerm_databricks_access_connector" "main" {
-  name                = local.connector_name
-  resource_group_name = local.rg_name
-  location            = local.location
-  identity {
-    type = var.identity_type
-  }
-  tags = local.default_tags
-}
-
-resource "azurerm_storage_account" "this" {
-  name                     = local.stg_name_to_metastore
-  resource_group_name      = local.rg_name
-  location                 = local.location
-  tags                     = local.default_tags
-  account_tier             = var.stg_account_tier
-  account_replication_type = var.stg_replication
-  is_hns_enabled           = true
-}
-
-resource "azurerm_storage_container" "this" {
-  name                  = var.container_name
-  storage_account_name  = azurerm_storage_account.this.name
-  container_access_type = "private"
-}
-
-resource "azurerm_role_assignment" "this" {
-  scope                = azurerm_storage_account.this.id
-  role_definition_name = var.role_name
-  principal_id         = azurerm_databricks_access_connector.main.identity[0].principal_id
-}
-
-########################################################
 # Create a Unity Catalog metastore and link it to workspaces
 ########################################################
 # resource "azuread_application" "this" {
@@ -106,15 +70,15 @@ resource "databricks_metastore_assignment" "this" {
 # Create the catalogs and schemas
 ########################################################
 
-resource "databricks_catalog" "main" {
-  metastore_id = databricks_metastore.this.id
-  name         = "data"
-  comment      = "This catalog is managed by terraform"
-  properties = {
-    purpose = "data area"
-  }
-  depends_on = [databricks_metastore_assignment.this]
-}
+# resource "databricks_catalog" "main" {
+#   metastore_id = databricks_metastore.this.id
+#   name         = "data"
+#   comment      = "This catalog is managed by terraform"
+#   properties = {
+#     purpose = "data area"
+#   }
+#   depends_on = [databricks_metastore_assignment.this]
+# }
 
 # resource "databricks_grants" "grant_catalog" {
 #   catalog = databricks_catalog.main.name
@@ -128,17 +92,17 @@ resource "databricks_catalog" "main" {
 #   ]
 # }
 
-resource "databricks_schema" "main" {
-  catalog_name = databricks_catalog.main.id
-  name         = "raw"
-  comment      = "this database is managed by terraform"
-  properties = {
-    kind = "various"
-  }
-  # depends_on = [
-  #   azuread_application.this, azuread_service_principal.this
-  # ]
-}
+# resource "databricks_schema" "main" {
+#   catalog_name = databricks_catalog.main.id
+#   name         = "raw"
+#   comment      = "this database is managed by terraform"
+#   properties = {
+#     kind = "various"
+#   }
+#   # depends_on = [
+#   #   azuread_application.this, azuread_service_principal.this
+#   # ]
+# }
 
 # resource "databricks_grants" "grant_schema" {
 #   schema = databricks_schema.main.id
@@ -157,10 +121,23 @@ resource "databricks_schema" "main" {
 ########################################################
 
 resource "azurerm_databricks_access_connector" "ext_access_connector" {
-  name                = "ext-databricks-mi"
-  resource_group_name = data.azurerm_resource_group.this.name
-  location            = data.azurerm_resource_group.this.location
+  name                = local.connector_external_name
+  resource_group_name = local.rg_name
+  location            = local.location
   identity {
     type = "SystemAssigned"
   }
+}
+
+#Todo remove let the datalake to adm
+resource "azurerm_storage_container" "ext_storage" {
+  name                  = "raw"
+  storage_account_name  = "dletldataflowdatadev"
+  container_access_type = "private"
+}
+
+resource "azurerm_role_assignment" "ext_storage" {
+  scope                = azurerm_storage_account.ext_storage.id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = azurerm_databricks_access_connector.ext_access_connector.identity[0].principal_id
 }

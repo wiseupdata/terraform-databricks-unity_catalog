@@ -1,3 +1,8 @@
+variable "stg_ext_id" {
+  type = string
+  
+}
+
 variable "app_name" {
   description = "The name of the application, dbs is the abbreviation to Databricks"
   type        = string
@@ -103,11 +108,11 @@ locals {
     "company" : var.company_name
   }
 
-  metastore_name = var.metastore_name == "auto-create" ? "${var.app_name}-${var.company_name}-metastore" : var.metastore_name
-  connector_name = var.connector_name == "auto-create" ? "${var.app_name}-${var.company_name}-connector" : var.connector_name
+  metastore_name          = var.metastore_name == "auto-create" ? "${var.app_name}-${var.company_name}-metastore" : var.metastore_name
+  connector_name          = var.connector_name == "auto-create" ? "${var.app_name}-${var.company_name}-connector" : var.connector_name
   connector_external_name = var.connector_external_name == "auto-create" ? "${var.app_name}-${var.company_name}-connector-ext" : var.connector_external_name
-  
-  default_tags   = keys(var.default_tags)[0] == "auto-create" ? local.basic_tags : var.default_tags
+
+  default_tags = keys(var.default_tags)[0] == "auto-create" ? local.basic_tags : var.default_tags
 
   metastore_key_name = var.metastore_key_name == "auto-create" ? "${var.app_name}-${var.company_name}-metastore-key" : var.metastore_key_name
 
