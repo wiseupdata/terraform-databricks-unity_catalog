@@ -107,7 +107,7 @@ variable "stg_name_to_metastore" {
 
 variable "container_to_catalog_names" {
   type    = list(any)
-  default = ["raw"]
+  default = ["raw", "strm", "trst", "agg", "tmp"] #strm streaming, trst trusted, agg agregated
 }
 
 locals {
@@ -145,5 +145,13 @@ locals {
 
   location = var.location == "auto-extract" ? data.azurerm_databricks_workspace.this.location : var.location
 
+  area_and_schema = distinct(flatten([
+    for area in var.areas : [
+      for schema in var.container_to_catalog_names : {
+        area   = "${area}_${var.env}"
+        schema = schema
+      }
+    ]
+  ]))
 }
 

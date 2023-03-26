@@ -1,4 +1,3 @@
-
 resource "azurerm_databricks_access_connector" "ext_access_connector" {
   name                = local.connector_external_name
   resource_group_name = local.rg_name
