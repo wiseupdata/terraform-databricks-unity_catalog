@@ -110,6 +110,10 @@ variable "container_to_catalog_names" {
   default = ["raw", "strm", "trst", "agg", "tmp"] #strm streaming, trst trusted, agg agregated
 }
 
+variable "ext_storages" {
+  type = list(any)
+}
+
 locals {
 
   basic_tags = {
@@ -142,6 +146,7 @@ locals {
 
   stg_ext_regx = "(?i)subscriptions/(.+)/resourceGroups/(.+)/providers/Microsoft.Storage/storageAccounts/(.+)"
   stg_ext_name = regex(local.stg_ext_regx, var.stg_ext_id)[2]
+  stg_ext_rg   = regex(local.stg_ext_regx, var.stg_ext_id)[1]
 
   location = var.location == "auto-extract" ? data.azurerm_databricks_workspace.this.location : var.location
 

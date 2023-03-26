@@ -11,3 +11,8 @@ data "azurerm_databricks_workspace" "this" {
 }
 
 data "azuread_client_config" "current" {}
+
+data "azurerm_storage_account" "this" {
+  name                = keys(var.ext_storages[0])[0]
+  resource_group_name = values(var.ext_storages[0])[0]
+}
